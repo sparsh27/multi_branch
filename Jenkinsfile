@@ -9,7 +9,7 @@ pipeline{
         stage('Scm Checkout'){
             steps{
                 
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'Github', url: 'https://github.com/sparsh27/new-maven.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'Github', url: 'https://github.com/sparsh27/multi_branch.git']]])
             }
             
             }
@@ -23,7 +23,7 @@ pipeline{
         stage('Maven Deploy'){
         
             steps{
-                deploy adapters: [tomcat8(credentialsId: 'tomcatcred', path: '', url: 'http://localhost:5050')], contextPath: 'mywebapp', war: '**/*.war'
+                deploy adapters: [tomcat8(credentialsId: 'tomcatcred', path: '', url: 'http://localhost:5050')], contextPath: 'mynewapp', war: '**/*.war'
             
             }
         
