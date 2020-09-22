@@ -33,6 +33,11 @@ pipeline{
                  sh "mvn package"
             }
         }
+        stage('Maven deploy'){
+            steps{
+            deploy adapters: [tomcat8(credentialsId: 'tomcatcred', path: '', url: 'http://localhost:5050')], contextPath: 'myNewApp', war: '**/*.war'
+            }
+        }
    
             
         }
