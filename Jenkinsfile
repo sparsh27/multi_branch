@@ -17,16 +17,21 @@ pipeline{
             
             steps{
                 
-                sh "mvn clean package"
+                sh "mvn compile"
             }
         } 
-        stage('Maven Deploy'){
+        stage('Maven Test'){
         
             steps{
-                deploy adapters: [tomcat8(credentialsId: 'tomcatcred', path: '', url: 'http://localhost:5050')], contextPath: 'mynewapp', war: '**/*.war'
-            
+                sh "mvn test"
             }
         
+        }
+        
+        stage('Maven package'){
+            steps{
+                 sh "mvn package"
+            }
         }
    
             
